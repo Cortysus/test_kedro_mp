@@ -1,5 +1,5 @@
 from kedro.io import DataCatalog, MemoryDataSet
-from kedro.runner import SequentialRunner
+from kedro.runner import ThreadRunner
 
 from src.test_kedro_mp.pipelines.test_pipe.pipeline import create_pipeline
 
@@ -9,7 +9,7 @@ data_catalog = DataCatalog({"mock_input": MemoryDataSet()})
 
 def run():
     pipeline = create_pipeline()
-    runner = SequentialRunner()
+    runner = ThreadRunner()
     runner.run(pipeline, data_catalog)
     pass
 
